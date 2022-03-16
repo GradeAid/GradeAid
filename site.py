@@ -18,6 +18,9 @@ from keras import backend as K
 
 np.seterr(divide="ignore", invalid="ignore")
 
+# this is a useless comment
+# haha
+# hahahahahahahahahahahahaha
 
 def sent2word(x):
     stop_words = set(stopwords.words("english"))
