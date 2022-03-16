@@ -81,14 +81,14 @@ It was satisfying that our neural network model using 300-dimensional LSTM as in
         <td align="center">
         <a href="https://github.com/Abhishek911cse">
             <img src="https://avatars.githubusercontent.com/u/61340365?v=4" width="100px;" alt="Abhishek" />
-            <br /><sub><b>Sai Sridhar Akula</b></sub>
+            <br /><sub><b>Abhishek Ramasubramaniam</b></sub>
         </a>
         <br />
     </td>
     <td align="center">
         <a href="https://github.com/ranjitmnair">
             <img src="https://avatars.githubusercontent.com/u/58624792?v=4" width="100px;" alt="Ranjit" />
-            <br /><sub><b>Sai Sridhar Akula</b></sub>
+            <br /><sub><b>Ranjit Nair</b></sub>
         </a>
         <br />
 </table>
