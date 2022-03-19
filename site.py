@@ -113,11 +113,14 @@ def create_task():
         return render_template("mainpage.html")
     else:
         K.clear_session()
+        # extract image and save to images folder
+        image = request.files["image"]
+        image.save("./image.jpg")
+        # print(request.get_data("image")["image"])
         final_text = request.get_json("text")["text"]
         score = convertToVec(final_text)
         K.clear_session()
         return jsonify({"score": score}), 201
-
 
 if __name__ == "__main__":
     app.run(debug=True)
