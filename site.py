@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from flask import Flask, request, render_template, url_for, jsonify, url_for
 import site
 import numpy as np
@@ -15,12 +16,11 @@ from sklearn.metrics import mean_squared_error
 from sklearn.metrics import cohen_kappa_score
 from gensim.models.keyedvectors import KeyedVectors
 from keras import backend as K
+import os
+from semantic_similarity import match_answer_with_key
 
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 np.seterr(divide="ignore", invalid="ignore")
-
-# this is a useless comment
-# haha
-# hahahahahahahahahahahahaha
 
 
 def sent2word(x):
@@ -136,9 +136,18 @@ def gradeAnswer():
     # print(image)
     # print(request.get_data("image")["image"])
     final_text = request.get_json("text")["text"]
+    semantic_strictness = request.get_json("semantic_strictness")["semantic_strictness"]
+    answer_key = request.get_json("answer_key")["answer_key"]
+    print(semantic_strictness, type(semantic_strictness))
+    print(answer_key, type(answer_key))
     score = convertToVec(final_text)
+    semantic_score = 0
+    if answer_key != "":
+        semantic_score = match_answer_with_key(
+            final_text, answer_key, float(semantic_strictness)
+        )
     K.clear_session()
-    return jsonify({"score": score}), 201
+    return jsonify({"score": score, "semantic_score": semantic_score}), 201
 
 
 @app.route("/ocr", methods=["POST"])

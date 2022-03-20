@@ -31,15 +31,6 @@
         </li>
       </ul>
       <div class="mui-tabs__pane mui--is-active" id="pane-default-1">
-        <div class="actions_area" id="actions_area1">
-          <button
-            type="button"
-            class="mui-btn mui-btn--raised mui-btn--primary"
-            onclick="senddata()"
-          >
-            Grade the Answer!
-          </button>
-        </div>
         <div id="input_area1" class="input_area">
           <section id="input_text1" class="mui-panel input_text">
             <textarea
@@ -48,11 +39,6 @@
               id="input_text_area1"
               placeholder="Student's Answer"
             ></textarea>
-            Toggle Answer Key
-            <label class="switch">
-              <input type="checkbox" onchange="toggleAnswerKey(1)" />
-              <span class="slider round"></span>
-            </label>
             <textarea
               rows="10"
               class="answer_key"
@@ -61,6 +47,72 @@
               placeholder="Answer Key"
             ></textarea>
           </section>
+          <section id="output1" class="output"></section>
+        </div>
+        <div class="actions_area" id="actions_area1">
+          <div id="grammar_weightage_div1" style="display: none">
+            <span class="grammar_weightage_value" id="grammar_weightage_value1"
+              >50</span
+            >
+            <!-- <label for="grammar_weightage1">Grammar Weightage</label> -->
+            <span>Semantic Weightage</span>
+            <input
+              type="range"
+              name="grammar_weightage1"
+              class="grammar_weightage"
+              id="grammar_weightage1"
+              min="0"
+              max="100"
+              step="1"
+              value="50"
+              onchange="updateGrammarWeight(1)"
+            />
+            <span>Grammar Weightage</span>
+          </div>
+          <div id="semantic_strictness_div1" style="display: none">
+            <span
+              class="semantic_strictness_value"
+              id="semantic_strictness_value1"
+              >0.5</span
+            >
+            <!-- <label for="grammar_weightage1">Grammar Weightage</label> -->
+            <span id="slider2_label1" class="slider2_label"
+              >Semantic Strictness</span
+            >
+            <span>Less Strict</span>
+            <input
+              type="range"
+              name="semantic_strictness1"
+              class="semantic_strictness"
+              id="semantic_strictness1"
+              min="0"
+              max="1"
+              step="0.01"
+              value="0.5"
+              onchange="updateSemanticStrictness(1)"
+            />
+            <span>More Strict</span>
+          </div>
+          <div>
+            Toggle Answer Key
+            <label class="switch">
+              <input
+                type="checkbox"
+                id="toggleAnswer1"
+                onchange="toggleAnswerKey(1)"
+              />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div>
+            <button
+              type="button"
+              class="mui-btn mui-btn--raised mui-btn--primary"
+              onclick="senddata(1)"
+            >
+              Grade the Answer!
+            </button>
+          </div>
         </div>
       </div>
       <div class="mui-tabs__pane" id="pane-default-2">
@@ -73,33 +125,17 @@
             <input id="image_input" type="file" name="name" accept="image/*" />
           </section>
           <section id="input_text2" class="mui-panel input_text">
-            <div class="actions_area" id="actions_area2">
-              <button
-                type="button"
-                class="mui-btn mui-btn--raised mui-btn--primary"
-                onclick="senddata()"
-              >
-                Grade the Answer!
-              </button>
-              <button
-                type="button"
-                class="mui-btn mui-btn--raised mui-btn--danger"
-                onclick="sendImage()"
-              >
-                Perform OCR!
-              </button>
-            </div>
             <textarea
               rows="20"
               class="input_text_area"
               id="input_text_area2"
               placeholder="Student's Answer"
             ></textarea>
-            Toggle Answer Key
+            <!-- Toggle Answer Key
             <label class="switch">
               <input type="checkbox" onchange="toggleAnswerKey(2)" />
               <span class="slider round"></span>
-            </label>
+            </label> -->
             <textarea
               rows="10"
               class="answer_key"
@@ -109,77 +145,123 @@
             ></textarea>
           </section>
         </div>
-
-        <!-- <div id="actions_area">
-          <button
-            type="button"
-            class="mui-btn mui-btn--raised mui-btn--primary"
-            onclick="senddata()"
-          >
-            Grade the Answer!
-          </button>
-          <button
-            type="button"
-            class="mui-btn mui-btn--raised mui-btn--danger"
-            onclick="sendImage()"
-          >
-            Perform OCR!
-          </button>
-        </div> -->
+        <div class="actions_area" id="actions_area2">
+          <div id="grammar_weightage_div2" style="display: none">
+            <span class="grammar_weightage_value" id="grammar_weightage_value2"
+              >50</span
+            >
+            <!-- <label for="grammar_weightage1">Grammar Weightage</label> -->
+            <span>Semantic Weightage</span>
+            <input
+              type="range"
+              name="grammar_weightage2"
+              class="grammar_weightage"
+              id="grammar_weightage2"
+              min="0"
+              max="100"
+              step="1"
+              onchange="updateGrammarWeight(2)"
+            />
+            <span>Grammar Weightage</span>
+          </div>
+          <div id="semantic_strictness_div2" style="display: none">
+            <span
+              class="semantic_strictness_value"
+              id="semantic_strictness_value2"
+              >0.5</span
+            >
+            <!-- <label for="grammar_weightage1">Grammar Weightage</label> -->
+            <span id="slider2_label2" class="slider2_label"
+              >Semantic Strictness</span
+            >
+            <span>Less Strict</span>
+            <input
+              type="range"
+              name="semantic_strictness2"
+              class="semantic_strictness"
+              id="semantic_strictness2"
+              min="0"
+              max="1"
+              step="0.01"
+              onchange="updateSemanticStrictness(2)"
+            />
+            <span>More Strict</span>
+          </div>
+          <div>
+            Toggle Answer Key
+            <label class="switch">
+              <input type="checkbox" onchange="toggleAnswerKey(2)" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div>
+            <button
+              type="button"
+              class="mui-btn mui-btn--raised mui-btn--primary"
+              onclick="senddata(2)"
+            >
+              Grade the Answer!
+            </button>
+            <button
+              type="button"
+              class="mui-btn mui-btn--raised mui-btn--danger"
+              onclick="sendImage()"
+            >
+              Perform OCR!
+            </button>
+          </div>
+        </div>
       </div>
-
-      <!-- <div id="input_area">
-        <section id="input_text" class="mui-panel">
-          <textarea
-            rows="20"
-            id="input_text_area"
-            placeholder="Student's Answer"
-          ></textarea>
-          <textarea
-            rows="10"
-            id="answer_key"
-            placeholder="Answer Key"
-          ></textarea>
-        </section>
-        <section id="image">
-          <img id="uploaded_image" alt="Upload an Image to view" /><br /><br />
-          <input id="image_input" type="file" name="name" accept="image/*" />
-        </section>
-      </div> -->
-
-      <!-- <div id="actions_area">
-        <button
-          type="button"
-          class="mui-btn mui-btn--raised mui-btn--primary"
-          onclick="senddata()"
-        >
-          Grade the Answer!
-        </button>
-        <button
-          type="button"
-          class="mui-btn mui-btn--raised mui-btn--danger"
-          onclick="sendImage()"
-        >
-          Perform OCR!
-        </button>
-      </div> -->
     </main>
-    <section id="output"></section>
     <script>
+      function updateGrammarWeight(id) {
+        document.getElementById("grammar_weightage_value" + id).innerText =
+          document.getElementById("grammar_weightage" + id).value;
+      }
+
+      function updateSemanticStrictness(id) {
+        document.getElementById("semantic_strictness_value" + id).innerText =
+          document.getElementById("semantic_strictness" + id).value;
+      }
+
       function toggleAnswerKey(id) {
         let curr = document.getElementById("answer_key" + id).style.display;
         if (curr === "none") {
           document.getElementById("answer_key" + id).style.display = "block";
+          document.getElementById(
+            "semantic_strictness_div" + id
+          ).style.display = "block";
+          document.getElementById("grammar_weightage_div" + id).style.display =
+            "block";
         } else {
           document.getElementById("answer_key" + id).style.display = "none";
+          document.getElementById(
+            "semantic_strictness_div" + id
+          ).style.display = "none";
+          document.getElementById("grammar_weightage_div" + id).style.display =
+            "none";
         }
       }
 
-      function senddata() {
-        var text = document.getElementById("input_text_area");
-        var output = document.getElementById("output");
+      function senddata(id) {
+        var text = document.getElementById("input_text_area" + id);
+        let checked = document.getElementById("toggleAnswer" + id);
+        let grammar_weightage, semantic_strictness, answer_key;
+        if (checked) {
+          grammar_weightage = document.getElementById(
+            "grammar_weightage" + id
+          ).value;
+          semantic_strictness = document.getElementById(
+            "semantic_strictness" + id
+          ).value;
+          answer_key = document.getElementById("answer_key" + id).value;
+        }
+        // grammar_weightage1
+        var output = document.getElementById("output" + id);
         const obj = {
           text: text.value,
+          semantic_strictness,
+          answer_key,
         };
         const str = JSON.stringify(obj);
         fetch("http://127.0.0.1:5000/grade", {
@@ -189,9 +271,25 @@
           .then((response) => response.json())
           .then((result) => {
             if (!result) {
-              output.innerHTML = "Your grade is: 0/10";
+              output.innerHTML = "<h3>Grammar Score = 0/10</h3>";
             } else {
-              output.innerHTML = "Your grade is:" + result.score + "/10";
+              output.innerHTML =
+                "<h3>Grammar Score =" +
+                result.score +
+                "/10</h3>" +
+                "<h3>Semantic Score = " +
+                result.semantic_score.semantic_score +
+                "/10</h3>" +
+                "<h1>Final Score = " +
+                Math.round(
+                  ((grammar_weightage * result.score +
+                    (100 - grammar_weightage) *
+                      result.semantic_score.semantic_score) /
+                    100) *
+                    100
+                ) /
+                  100 +
+                "/10</h1>";
             }
             console.log("Success:", result);
           })

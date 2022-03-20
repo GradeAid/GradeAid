@@ -85,10 +85,11 @@ h1 {
 }
 
 .actions_area {
+  margin-top: 20px;
   padding: 10px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
 /* #actions_area button {
@@ -107,10 +108,39 @@ h1 {
   align-items: center;
 }
 
-#output {
+.output {
   /* color: white; */
   font-family: Product Sans;
 }
+
+.grammar_weightage_value {
+  position: relative;
+  bottom: 20px;
+  left: 198px;
+}
+
+.slider2_label {
+  position: relative;
+  bottom: 40px;
+  left: 198px;
+}
+
+.semantic_strictness_value {
+  position: relative;
+  bottom: 20px;
+  left: 265px;
+}
+
+/* .grammar_weightage::before {
+  content: "0";
+  position: relative;
+  bottom: 10px;
+}
+.grammar_weightage::after {
+  content: "100";
+  position: relative;
+  bottom: 10px;
+} */
 
 /* The switch - the box around the slider */
 .switch {
