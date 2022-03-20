@@ -1,5 +1,6 @@
 from asyncio.windows_events import NULL
-from flask import Flask, request, render_template, url_for, jsonify, url_for
+from flask import Flask, request, render_template, jsonify, url_for
+from flask_cors import CORS
 import site
 import numpy as np
 import pandas as pd
@@ -106,7 +107,7 @@ def convertToVec(text):
 
 
 app = Flask(__name__)
-
+CORS(app)
 
 @app.route("/", methods=["GET"])
 def create_task():
