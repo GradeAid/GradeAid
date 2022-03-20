@@ -5,49 +5,53 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GradeAid</title>
+    <link
+      href="//cdn.muicss.com/mui-0.10.3/css/mui.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="//cdn.muicss.com/mui-0.10.3/js/mui.min.js"></script>
     <link rel="stylesheet" href="/static/style.css" />
   </head>
   <body>
-    <header>
+    <header class="mui-appbar">
       <h1>GradeAid - An Smart Exam Grading Assistant</h1>
     </header>
     <main>
       <div id="input_area">
-        <section id="input_text">
-          <!-- cols="180" -->
+        <section id="input_text" class="mui-panel">
           <textarea
             rows="20"
             id="input_text_area"
-            placeholder="Enter Your Essay Here"
+            placeholder="Student's Answer"
+          ></textarea>
+          <textarea
+            rows="10"
+            id="answer_key"
+            placeholder="Answer Key"
           ></textarea>
         </section>
-        <!-- view uploaded image here -->
         <section id="image">
           <img id="uploaded_image" alt="Upload an Image to view" /><br /><br />
-          <!-- <label for="image_input"></label> -->
           <input id="image_input" type="file" name="name" accept="image/*" />
         </section>
       </div>
 
       <div id="actions_area">
-        <!-- <button class="btn btn-outline-light" onclick="openModal()">
-          Upload Image
-        </button> -->
         <button
           type="button"
-          class="btn btn-outline-light"
+          class="mui-btn mui-btn--raised mui-btn--primary"
           onclick="senddata()"
         >
-          Score my Essay!
+          Grade the Answer!
         </button>
         <button
           type="button"
-          class="btn btn-outline-light"
+          class="mui-btn mui-btn--raised mui-btn--danger"
           onclick="sendImage()"
         >
           Perform OCR!
         </button>
-        <!-- style="display: none" -->
       </div>
     </main>
     <section id="output"></section>
@@ -77,24 +81,16 @@
           });
       }
 
-      // function openModal() {
-      //   document.getElementById("file-input").click();
-      // }
-
-      // if image has been uploaded, display it
       document.getElementById("image_input").onchange = function () {
         var reader = new FileReader();
         reader.onload = function (e) {
-          // document.getElementById('image')
           document.getElementById("uploaded_image").src = e.target.result;
           document.getElementById("uploaded_image").alt = "Input Image";
           document.getElementById("uploaded_image").style.border =
             "1px solid black";
           document.getElementById("image_input").style.display = "none";
-          // "<img src='" + e.target.result + "' alt='input image' />";
         };
         reader.readAsDataURL(this.files[0]);
-        // sendImage();
       };
 
       // send image to backend server
@@ -118,6 +114,5 @@
           });
       }
     </script>
-    <!-- <script src="index.js"></script> -->
   </body>
 </html>
