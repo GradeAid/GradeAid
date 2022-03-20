@@ -18,7 +18,117 @@
       <h1>GradeAid - An Smart Exam Grading Assistant</h1>
     </header>
     <main>
-      <div id="input_area">
+      <ul class="mui-tabs__bar">
+        <li class="mui--is-active">
+          <a data-mui-toggle="tab" data-mui-controls="pane-default-1"
+            >Text Only</a
+          >
+        </li>
+        <li>
+          <a data-mui-toggle="tab" data-mui-controls="pane-default-2"
+            >OCR Grading</a
+          >
+        </li>
+      </ul>
+      <div class="mui-tabs__pane mui--is-active" id="pane-default-1">
+        <div class="actions_area" id="actions_area1">
+          <button
+            type="button"
+            class="mui-btn mui-btn--raised mui-btn--primary"
+            onclick="senddata()"
+          >
+            Grade the Answer!
+          </button>
+        </div>
+        <div id="input_area1" class="input_area">
+          <section id="input_text1" class="mui-panel input_text">
+            <textarea
+              rows="20"
+              class="input_text_area"
+              id="input_text_area1"
+              placeholder="Student's Answer"
+            ></textarea>
+            Toggle Answer Key
+            <label class="switch">
+              <input type="checkbox" onchange="toggleAnswerKey(1)" />
+              <span class="slider round"></span>
+            </label>
+            <textarea
+              rows="10"
+              class="answer_key"
+              id="answer_key1"
+              style="display: none"
+              placeholder="Answer Key"
+            ></textarea>
+          </section>
+        </div>
+      </div>
+      <div class="mui-tabs__pane" id="pane-default-2">
+        <div id="input_area2" class="input_area">
+          <section id="image">
+            <img
+              id="uploaded_image"
+              alt="Upload an Image to view"
+            /><br /><br />
+            <input id="image_input" type="file" name="name" accept="image/*" />
+          </section>
+          <section id="input_text2" class="mui-panel input_text">
+            <div class="actions_area" id="actions_area2">
+              <button
+                type="button"
+                class="mui-btn mui-btn--raised mui-btn--primary"
+                onclick="senddata()"
+              >
+                Grade the Answer!
+              </button>
+              <button
+                type="button"
+                class="mui-btn mui-btn--raised mui-btn--danger"
+                onclick="sendImage()"
+              >
+                Perform OCR!
+              </button>
+            </div>
+            <textarea
+              rows="20"
+              class="input_text_area"
+              id="input_text_area2"
+              placeholder="Student's Answer"
+            ></textarea>
+            Toggle Answer Key
+            <label class="switch">
+              <input type="checkbox" onchange="toggleAnswerKey(2)" />
+              <span class="slider round"></span>
+            </label>
+            <textarea
+              rows="10"
+              class="answer_key"
+              id="answer_key2"
+              style="display: none"
+              placeholder="Answer Key"
+            ></textarea>
+          </section>
+        </div>
+
+        <!-- <div id="actions_area">
+          <button
+            type="button"
+            class="mui-btn mui-btn--raised mui-btn--primary"
+            onclick="senddata()"
+          >
+            Grade the Answer!
+          </button>
+          <button
+            type="button"
+            class="mui-btn mui-btn--raised mui-btn--danger"
+            onclick="sendImage()"
+          >
+            Perform OCR!
+          </button>
+        </div> -->
+      </div>
+
+      <!-- <div id="input_area">
         <section id="input_text" class="mui-panel">
           <textarea
             rows="20"
@@ -35,9 +145,9 @@
           <img id="uploaded_image" alt="Upload an Image to view" /><br /><br />
           <input id="image_input" type="file" name="name" accept="image/*" />
         </section>
-      </div>
+      </div> -->
 
-      <div id="actions_area">
+      <!-- <div id="actions_area">
         <button
           type="button"
           class="mui-btn mui-btn--raised mui-btn--primary"
@@ -52,10 +162,19 @@
         >
           Perform OCR!
         </button>
-      </div>
+      </div> -->
     </main>
     <section id="output"></section>
     <script>
+      function toggleAnswerKey(id) {
+        let curr = document.getElementById("answer_key" + id).style.display;
+        if (curr === "none") {
+          document.getElementById("answer_key" + id).style.display = "block";
+        } else {
+          document.getElementById("answer_key" + id).style.display = "none";
+        }
+      }
+
       function senddata() {
         var text = document.getElementById("input_text_area");
         var output = document.getElementById("output");
