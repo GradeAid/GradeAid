@@ -4,15 +4,15 @@ import easyocr
 from pylab import rcParams
 from IPython.display import Image
 
-rcParams['figure.figsize'] = 10, 10
+rcParams["figure.figsize"] = 10, 10
 
-reader = easyocr.Reader(['en'])
+reader = easyocr.Reader(["en"])
 # Image("C:\Users\shrey\Downloads\Page1.jpeg")
-output = reader.readtext(cv2.imread(r"C:\Users\shrey\Downloads\stuff.jpeg"))
+output = reader.readtext(cv2.imread(r"C:\Users\Siddharth\Downloads\stuff.jpeg"))
 
-text = ''
+text = ""
 for i in output:
-    text += i[1] + ' '
+    text += i[1] + " "
 
 print(text)
 

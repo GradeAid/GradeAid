@@ -22,6 +22,23 @@ np.seterr(divide="ignore", invalid="ignore")
 # haha
 # hahahahahahahahahahahahaha
 
+import matplotlib.pyplot as plt
+import cv2
+import easyocr
+from pylab import rcParams
+from IPython.display import Image
+
+
+def image_ocr(image, lang="en"):
+    reader = easyocr.Reader([lang])
+    output = reader.readtext(cv2.imread(image))
+
+    text = ""
+    for i in output:
+        text += i[1] + " "
+
+    return text
+
 
 def sent2word(x):
     stop_words = set(stopwords.words("english"))
@@ -70,15 +87,7 @@ def getVecs(essays, model, num_features):
 
 def get_model():
     model = Sequential()
-    model.add(
-        LSTM(
-            300,
-            dropout=0.4,
-            recurrent_dropout=0.4,
-            input_shape=[1, 300],
-            return_sequences=True,
-        )
-    )
+    model.add(LSTM(300, dropout=0.4, recurrent_dropout=0.4, input_shape=[1, 300], return_sequences=True,))
     model.add(LSTM(64, recurrent_dropout=0.4))
     model.add(Dropout(0.5))
     model.add(Dense(1, activation="relu"))
@@ -96,9 +105,7 @@ def convertToVec(text):
         clean_test_essays.append(sent2word(content))
         testDataVecs = getVecs(clean_test_essays, model, num_features)
         testDataVecs = np.array(testDataVecs)
-        testDataVecs = np.reshape(
-            testDataVecs, (testDataVecs.shape[0], 1, testDataVecs.shape[1])
-        )
+        testDataVecs = np.reshape(testDataVecs, (testDataVecs.shape[0], 1, testDataVecs.shape[1]))
 
         lstm_model = load_model("final_lstm.h5")
         preds = lstm_model.predict(testDataVecs)
