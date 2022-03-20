@@ -47,8 +47,9 @@
               placeholder="Answer Key"
             ></textarea>
           </section>
-          <section id="output1" class="output"></section>
         </div>
+        <section id="output1" class="output"></section>
+        <section id="feedback" class="output"></section>
         <div class="actions_area" id="actions_area1">
           <div id="grammar_weightage_div1" style="display: none">
             <span class="grammar_weightage_value" id="grammar_weightage_value1"
@@ -214,73 +215,76 @@
       </div>
     </main>
     <script>
+      const feedback = document.getElementById('feedback');
+
       function updateGrammarWeight(id) {
-        document.getElementById("grammar_weightage_value" + id).innerText =
-          document.getElementById("grammar_weightage" + id).value;
+        document.getElementById('grammar_weightage_value' + id).innerText =
+          document.getElementById('grammar_weightage' + id).value;
       }
 
       function updateSemanticStrictness(id) {
-        document.getElementById("semantic_strictness_value" + id).innerText =
-          document.getElementById("semantic_strictness" + id).value;
+        document.getElementById('semantic_strictness_value' + id).innerText =
+          document.getElementById('semantic_strictness' + id).value;
       }
 
       function toggleAnswerKey(id) {
-        let curr = document.getElementById("answer_key" + id).style.display;
-        if (curr === "none") {
-          document.getElementById("answer_key" + id).style.display = "block";
+        let curr = document.getElementById('answer_key' + id).style.display;
+        if (curr === 'none') {
+          document.getElementById('answer_key' + id).style.display = 'block';
           document.getElementById(
-            "semantic_strictness_div" + id
-          ).style.display = "block";
-          document.getElementById("grammar_weightage_div" + id).style.display =
-            "block";
+            'semantic_strictness_div' + id
+          ).style.display = 'block';
+          document.getElementById('grammar_weightage_div' + id).style.display =
+            'block';
         } else {
-          document.getElementById("answer_key" + id).style.display = "none";
+          document.getElementById('answer_key' + id).style.display = 'none';
           document.getElementById(
-            "semantic_strictness_div" + id
-          ).style.display = "none";
-          document.getElementById("grammar_weightage_div" + id).style.display =
-            "none";
+            'semantic_strictness_div' + id
+          ).style.display = 'none';
+          document.getElementById('grammar_weightage_div' + id).style.display =
+            'none';
         }
       }
 
       function senddata(id) {
-        var text = document.getElementById("input_text_area" + id);
-        let checked = document.getElementById("toggleAnswer" + id);
+        var text = document.getElementById('input_text_area' + id);
+        let checked = document.getElementById('toggleAnswer' + id);
         let grammar_weightage, semantic_strictness, answer_key;
         if (checked) {
           grammar_weightage = document.getElementById(
-            "grammar_weightage" + id
+            'grammar_weightage' + id
           ).value;
           semantic_strictness = document.getElementById(
-            "semantic_strictness" + id
+            'semantic_strictness' + id
           ).value;
-          answer_key = document.getElementById("answer_key" + id).value;
+          answer_key = document.getElementById('answer_key' + id).value;
         }
         // grammar_weightage1
-        var output = document.getElementById("output" + id);
+        var output = document.getElementById('output' + id);
         const obj = {
           text: text.value,
           semantic_strictness,
           answer_key,
         };
+
         const str = JSON.stringify(obj);
-        fetch("http://127.0.0.1:5000/grade", {
-          method: "POST",
+        fetch('http://127.0.0.1:5000/grade', {
+          method: 'POST',
           body: JSON.stringify(obj),
         })
           .then((response) => response.json())
           .then((result) => {
             if (!result) {
-              output.innerHTML = "<h3>Grammar Score = 0/10</h3>";
+              output.innerHTML = '<h3>Grammar Score = 0/10</h3>';
             } else {
               output.innerHTML =
-                "<h3>Grammar Score =" +
+                '<h3>Grammar Score =' +
                 result.score +
-                "/10</h3>" +
-                "<h3>Semantic Score = " +
+                '/10</h3>' +
+                '<h3>Semantic Score = ' +
                 result.semantic_score.semantic_score +
-                "/10</h3>" +
-                "<h1>Final Score = " +
+                '/10</h3>' +
+                '<h1>Final Score = ' +
                 Math.round(
                   ((grammar_weightage * result.score +
                     (100 - grammar_weightage) *
@@ -289,45 +293,51 @@
                     100
                 ) /
                   100 +
-                "/10</h1>";
+                '/10</h1>';
+              feedback_data = result.semantic_score.key_sentences_not_in_answer;
+              feedback.innerHTML =
+                '<h1> Feedback </h1>' +
+                feedback_data.map((data) => {
+                  return '<h3>' + data + '</h3>';
+                });
             }
-            console.log("Success:", result);
+            console.log('Success:', result);
           })
           .catch((error) => {
-            console.error("Error:", error);
+            console.error('Error:', error);
           });
       }
 
-      document.getElementById("image_input").onchange = function () {
+      document.getElementById('image_input').onchange = function () {
         var reader = new FileReader();
         reader.onload = function (e) {
-          document.getElementById("uploaded_image").src = e.target.result;
-          document.getElementById("uploaded_image").alt = "Input Image";
-          document.getElementById("uploaded_image").style.border =
-            "1px solid black";
-          document.getElementById("image_input").style.display = "none";
+          document.getElementById('uploaded_image').src = e.target.result;
+          document.getElementById('uploaded_image').alt = 'Input Image';
+          document.getElementById('uploaded_image').style.border =
+            '1px solid black';
+          document.getElementById('image_input').style.display = 'none';
         };
         reader.readAsDataURL(this.files[0]);
       };
 
       // send image to backend server
       function sendImage() {
-        var image = document.getElementById("image_input");
-        var text = document.getElementById("input_text_area");
+        var image = document.getElementById('image_input');
+        var text = document.getElementById('input_text_area');
         var formData = new FormData();
         console.log(image.files, image.value);
-        formData.append("image", image.files[0]);
-        fetch("http://127.0.0.1:5000/ocr", {
-          method: "POST",
+        formData.append('image', image.files[0]);
+        fetch('http://127.0.0.1:5000/ocr', {
+          method: 'POST',
           body: formData,
         })
           .then((response) => response.json())
           .then((result) => {
             text.value = result.text;
-            console.log("Success:", result);
+            console.log('Success:', result);
           })
           .catch((error) => {
-            console.error("Error:", error);
+            console.error('Error:', error);
           });
       }
     </script>
