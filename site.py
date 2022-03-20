@@ -108,22 +108,53 @@ def convertToVec(text):
 app = Flask(__name__)
 
 
-@app.route("/", methods=["POST", "GET"])
+@app.route("/", methods=["GET"])
 def create_task():
-    if request.method == "GET":
-        return render_template("mainpage.html")
-    else:
-        K.clear_session()
-        # extract image and save to images folder
-        print(request.files)
-        image = request.files["image"]
-        # image.save("./image.jpg")
-        print(image)
-        # print(request.get_data("image")["image"])
-        final_text = request.get_json("text")["text"]
-        score = convertToVec(final_text)
-        K.clear_session()
-        return jsonify({"score": score}), 201
+    # if request.method == "GET":
+    return render_template("mainpage.html")
+    # else:
+    #     K.clear_session()
+    #     # extract image and save to images folder
+    #     print(request.files)
+    #     image = request.files["image"]
+    #     # image.save("./image.jpg")
+    #     print(image)
+    #     # print(request.get_data("image")["image"])
+    #     final_text = request.get_json("text")["text"]
+    #     score = convertToVec(final_text)
+    #     K.clear_session()
+    #     return jsonify({"score": score}), 201
+
+
+@app.route("/grade", methods=["POST"])
+def gradeAnswer():
+    K.clear_session()
+    # extract image and save to images folder
+    # print(request.files)
+    # image = request.files["image"]
+    # image.save("./image.jpg")
+    # print(image)
+    # print(request.get_data("image")["image"])
+    final_text = request.get_json("text")["text"]
+    score = convertToVec(final_text)
+    K.clear_session()
+    return jsonify({"score": score}), 201
+
+
+@app.route("/ocr", methods=["POST"])
+def performOCR():
+    # K.clear_session()
+    # extract image and save to images folder
+    print(request.files)
+    image = request.files["image"]
+    # image.save("./image.jpg")
+    print(image)
+    # print(request.get_data("image")["image"])
+    # final_text = request.get_json("text")["text"]
+    # score = convertToVec(final_text)
+    # K.clear_session()
+    return jsonify({"text": "ABC - " + image.content_type}), 201
+    # return jsonify({"score": score}), 201
 
 
 if __name__ == "__main__":

@@ -97,7 +97,7 @@ h1 {
   align-items: center;
 }
 
-h3 {
-  color: white;
+#output {
+  /* color: white; */
   font-family: Product Sans;
 }

@@ -40,19 +40,26 @@
         >
           Score my Essay!
         </button>
+        <button
+          type="button"
+          class="btn btn-outline-light"
+          onclick="sendImage()"
+        >
+          Perform OCR!
+        </button>
         <!-- style="display: none" -->
       </div>
     </main>
-    <h3 id="output"></h3>
+    <section id="output"></section>
     <script>
       function senddata() {
-        var text = document.getElementById("main");
+        var text = document.getElementById("input_text_area");
         var output = document.getElementById("output");
         const obj = {
           text: text.value,
         };
         const str = JSON.stringify(obj);
-        fetch("http://127.0.0.1:5000/", {
+        fetch("http://127.0.0.1:5000/grade", {
           method: "POST",
           body: JSON.stringify(obj),
         })
@@ -91,23 +98,25 @@
       };
 
       // send image to backend server
-      // function sendImage() {
-      //   var image = document.getElementById("file-input");
-      //   var formData = new FormData();
-      //   console.log(image.files, image.value);
-      //   formData.append("image", image.files[0]);
-      //   fetch("http://127.0.0.1:5000/", {
-      //     method: "POST",
-      //     body: formData,
-      //   })
-      //     .then((response) => response.json())
-      //     .then((result) => {
-      //       console.log("Success:", result);
-      //     })
-      //     .catch((error) => {
-      //       console.error("Error:", error);
-      //     });
-      // }
+      function sendImage() {
+        var image = document.getElementById("image_input");
+        var text = document.getElementById("input_text_area");
+        var formData = new FormData();
+        console.log(image.files, image.value);
+        formData.append("image", image.files[0]);
+        fetch("http://127.0.0.1:5000/ocr", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((result) => {
+            text.value = result.text;
+            console.log("Success:", result);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
     </script>
     <!-- <script src="index.js"></script> -->
   </body>
