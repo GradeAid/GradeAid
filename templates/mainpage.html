@@ -8,43 +8,41 @@
     <link rel="stylesheet" href="/static/style.css" />
   </head>
   <body>
-    <br /><br />
-    <h1>AUTOMATED ESSAY</h1>
-    <h1>SCORING</h1>
-    <br />
-    <div class="input-group">
-      <textarea
-        id="main"
-        placeholder="Enter Essay Here"
-        rows="11"
-        cols="180"
-      ></textarea>
-
-      <!-- view uploaded image here -->
-      <div id="image">
-        <img />
+    <header>
+      <h1>GradeAid - An Smart Exam Grading Assistant</h1>
+    </header>
+    <main>
+      <div id="input_area">
+        <section id="input_text">
+          <!-- cols="180" -->
+          <textarea
+            rows="20"
+            id="input_text_area"
+            placeholder="Enter Your Essay Here"
+          ></textarea>
+        </section>
+        <!-- view uploaded image here -->
+        <section id="image">
+          <img id="uploaded_image" alt="Upload an Image to view" /><br /><br />
+          <!-- <label for="image_input"></label> -->
+          <input id="image_input" type="file" name="name" accept="image/*" />
+        </section>
       </div>
 
-      <br />
-    </div>
-
-    <br />
-    <button class="btn btn-outline-light" onclick="openModal()">
-      Upload Image
-    </button>
-    <button type="button" class="btn btn-outline-light" onclick="senddata()">
-      Score my Essay!
-    </button>
-    <input
-      id="file-input"
-      type="file"
-      name="name"
-      style="display: none"
-      accept="image/*"
-    />
-    <br />
-    <br />
-
+      <div id="actions_area">
+        <!-- <button class="btn btn-outline-light" onclick="openModal()">
+          Upload Image
+        </button> -->
+        <button
+          type="button"
+          class="btn btn-outline-light"
+          onclick="senddata()"
+        >
+          Score my Essay!
+        </button>
+        <!-- style="display: none" -->
+      </div>
+    </main>
     <h3 id="output"></h3>
     <script>
       function senddata() {
@@ -72,39 +70,44 @@
           });
       }
 
-      function openModal() {
-        document.getElementById("file-input").click();
-      }
+      // function openModal() {
+      //   document.getElementById("file-input").click();
+      // }
 
       // if image has been uploaded, display it
-      document.getElementById("file-input").onchange = function () {
+      document.getElementById("image_input").onchange = function () {
         var reader = new FileReader();
         reader.onload = function (e) {
-          document.getElementById("image").innerHTML =
-            "<img src='" + e.target.result + "' alt='test' />";
+          // document.getElementById('image')
+          document.getElementById("uploaded_image").src = e.target.result;
+          document.getElementById("uploaded_image").alt = "Input Image";
+          document.getElementById("uploaded_image").style.border =
+            "1px solid black";
+          document.getElementById("image_input").style.display = "none";
+          // "<img src='" + e.target.result + "' alt='input image' />";
         };
         reader.readAsDataURL(this.files[0]);
-        sendImage();
+        // sendImage();
       };
 
       // send image to backend server
-      function sendImage() {
-        var image = document.getElementById("file-input");
-        var formData = new FormData();
-        console.log(image.files, image.value);
-        formData.append("image", image.files[0]);
-        fetch("http://127.0.0.1:5000/", {
-          method: "POST",
-          body: formData,
-        })
-          .then((response) => response.json())
-          .then((result) => {
-            console.log("Success:", result);
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
-      }
+      // function sendImage() {
+      //   var image = document.getElementById("file-input");
+      //   var formData = new FormData();
+      //   console.log(image.files, image.value);
+      //   formData.append("image", image.files[0]);
+      //   fetch("http://127.0.0.1:5000/", {
+      //     method: "POST",
+      //     body: formData,
+      //   })
+      //     .then((response) => response.json())
+      //     .then((result) => {
+      //       console.log("Success:", result);
+      //     })
+      //     .catch((error) => {
+      //       console.error("Error:", error);
+      //     });
+      // }
     </script>
     <!-- <script src="index.js"></script> -->
   </body>

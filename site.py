@@ -22,6 +22,7 @@ np.seterr(divide="ignore", invalid="ignore")
 # haha
 # hahahahahahahahahahahahaha
 
+
 def sent2word(x):
     stop_words = set(stopwords.words("english"))
     x = re.sub("[^A-Za-z]", " ", x)
@@ -114,13 +115,16 @@ def create_task():
     else:
         K.clear_session()
         # extract image and save to images folder
+        print(request.files)
         image = request.files["image"]
-        image.save("./image.jpg")
+        # image.save("./image.jpg")
+        print(image)
         # print(request.get_data("image")["image"])
         final_text = request.get_json("text")["text"]
         score = convertToVec(final_text)
         K.clear_session()
         return jsonify({"score": score}), 201
+
 
 if __name__ == "__main__":
     app.run(debug=True)
