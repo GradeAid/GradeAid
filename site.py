@@ -23,6 +23,26 @@ from semantic_similarity import match_answer_with_key
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 np.seterr(divide="ignore", invalid="ignore")
 
+import matplotlib.pyplot as plt
+import cv2
+import easyocr
+from pylab import rcParams
+from IPython.display import Image
+
+
+def getTextFromImage():
+    rcParams["figure.figsize"] = 10, 10
+
+    reader = easyocr.Reader(["en"])
+    # Image("C:\Users\shrey\Downloads\Page1.jpeg")
+    output = reader.readtext(cv2.imread(r"./image.jpg"))
+
+    text = ""
+    for i in output:
+        text += i[1] + " "
+    return text
+    # print(text)
+
 
 def sent2word(x):
     stop_words = set(stopwords.words("english"))
@@ -109,6 +129,7 @@ def convertToVec(text):
 app = Flask(__name__)
 CORS(app)
 
+
 @app.route("/", methods=["GET"])
 def create_task():
     # if request.method == "GET":
@@ -157,13 +178,16 @@ def performOCR():
     # extract image and save to images folder
     print(request.files)
     image = request.files["image"]
-    # image.save("./image.jpg")
-    print(image)
+    image.save("./image.jpg")
+    ocr_text = getTextFromImage()
+    # print(image["image"])
+    # imagefile = request.files.get("image", "")
+    # print(imagefile)
     # print(request.get_data("image")["image"])
     # final_text = request.get_json("text")["text"]
     # score = convertToVec(final_text)
     # K.clear_session()
-    return jsonify({"text": "ABC - " + image.content_type}), 201
+    return jsonify({"text": ocr_text}), 201
     # return jsonify({"score": score}), 201
 
 

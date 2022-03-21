@@ -1,11 +1,15 @@
-@font-face {
+/* @font-face {
   font-family: "Product Sans";
   font-style: normal;
   font-weight: 400;
   src: local("Open Sans"), local("OpenSans"),
     url(https://fonts.gstatic.com/s/productsans/v5/HYvgU2fE2nRJvZ5JFAumwegdm0LZdjqr5-oayXSOefg.woff2)
       format("woff2");
-}
+} */
+
+/* <style> */
+@import url("https://fonts.googleapis.com/css2?family=Poppins&family=Raleway:wght@500&display=swap");
+/* </style> */
 
 * {
   margin: 0;
@@ -14,7 +18,7 @@
 }
 
 body {
-  font-family: Product Sans;
+  font-family: Raleway;
 
   /* background-image: url("/static/back.jpg"); */
   /* background-repeat: no-repeat;
@@ -40,6 +44,10 @@ h1 {
   padding: 10px;
   align-items: center;
   justify-content: space-around;
+}
+
+#input_area2 {
+  flex-wrap: wrap;
 }
 
 .input_text {
@@ -114,21 +122,25 @@ h1 {
   align-items: center;
 }
 
-.output {
-  /* color: white; */
-  font-family: Product Sans;
-}
-
 .grammar_weightage_value {
   position: relative;
   bottom: 20px;
   left: 198px;
 }
 
-.slider2_label {
+.semantic_wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+/* .slider2_label {
   position: relative;
   bottom: 20px;
   left: 198px;
+} */
+
+.mui-panel {
+  border-radius: 10px;
 }
 
 /* .semantic_strictness_value {
@@ -211,6 +223,22 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+#loading {
+  text-align: center;
+}
+
+.input_text.mui-panel {
+  padding: 0;
+}
+
+.input_text.mui-panel textarea {
+  border: 0;
+}
+
+.answer_key {
+  border-top: 1px solid black !important;
+}
+
 /* Output Section */
 .results {
   max-height: 600px;
@@ -219,16 +247,41 @@ input:checked + .slider:before {
   padding: 20px;
   width: 45%;
   overflow: auto;
+  background-color: white;
   /* display: flex; */
   /* flex-direction: column; */
   /* align-items: center; */
   /* justify-content: space-around; */
-  background-color: white;
+}
+
+#results2 {
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.output {
+  /* color: white; */
+  font-family: Poppins;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  /* width: 90%; */
+  height: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  resize: none;
+  outline: none;
+  /* border: 1px solid black; */
 }
 
 #output1,
 #feedback {
-  display: flex;
+  /* display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
@@ -239,7 +292,7 @@ input:checked + .slider:before {
   border-radius: 10px;
   resize: none;
   outline: none;
-  border: 1px solid black;
+  border: 1px solid black; */
 }
 
 #output1 {
@@ -253,7 +306,32 @@ input:checked + .slider:before {
 
 .score {
   font-size: 50px;
-  font-family: Product Sans;
+  font-family: Poppins;
   color: green;
   font-weight: bold;
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid darkblue;
+  border-color: darkblue transparent darkblue transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
