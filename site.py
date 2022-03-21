@@ -1,7 +1,6 @@
 from asyncio.windows_events import NULL
 from flask import Flask, request, render_template, jsonify, url_for
 from flask_cors import CORS
-import site
 import numpy as np
 import pandas as pd
 import nltk
@@ -34,14 +33,12 @@ def getTextFromImage():
     rcParams["figure.figsize"] = 10, 10
 
     reader = easyocr.Reader(["en"])
-    # Image("C:\Users\shrey\Downloads\Page1.jpeg")
     output = reader.readtext(cv2.imread(r"./image.jpg"))
 
     text = ""
     for i in output:
         text += i[1] + " "
     return text
-    # print(text)
 
 
 def sent2word(x):
@@ -128,24 +125,17 @@ def convertToVec(text):
 
 app = Flask(__name__)
 CORS(app)
+# app.run(use_reloader=False)
 
 
 @app.route("/", methods=["GET"])
 def create_task():
-    # if request.method == "GET":
+    return render_template("index.html")
+
+
+@app.route("/upload", methods=["GET"])
+def go_to_upload_page():
     return render_template("mainpage.html")
-    # else:
-    #     K.clear_session()
-    #     # extract image and save to images folder
-    #     print(request.files)
-    #     image = request.files["image"]
-    #     # image.save("./image.jpg")
-    #     print(image)
-    #     # print(request.get_data("image")["image"])
-    #     final_text = request.get_json("text")["text"]
-    #     score = convertToVec(final_text)
-    #     K.clear_session()
-    #     return jsonify({"score": score}), 201
 
 
 @app.route("/grade", methods=["POST"])
