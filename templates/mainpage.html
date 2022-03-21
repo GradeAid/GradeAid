@@ -16,7 +16,7 @@
   </head>
   <body>
     <header class="mui-appbar">
-      <h1>GradeAid - An Smart Exam Grading Assistant</h1>
+      <h1>GradeAid - A Smart Exam Grading Assistant</h1>
     </header>
     <main>
       <ul class="mui-tabs__bar">
@@ -48,12 +48,12 @@
               placeholder="Answer Key"
             ></textarea>
           </section>
-          <div class="results">
-            <div id="output1" class="output">
-              <h1>Your Score will appear here!</h1>
+          <div class="results mui-panel">
+            <div id="output1" class="output mui-panel">
+              <h1>Score</h1>
             </div>
-            <div id="feedback" class="output">
-              <h1>Feedback will appear here!</h1>
+            <div id="feedback1" class="output mui-panel">
+              <h1>Feedback</h1>
             </div>
           </div>
         </div>
@@ -64,45 +64,58 @@
               >50</span
             > -->
             <!-- <label for="grammar_weightage1">Grammar Weightage</label> -->
-            <span>Grammar Weightage</span>
-            <span id="grammar_value1" class="grammar_value">(50%)</span>
-            <input
-              type="range"
-              name="grammar_weightage1"
-              class="grammar_weightage"
-              id="grammar_weightage1"
-              min="0"
-              max="100"
-              step="1"
-              value="50"
-              onchange="updateGrammarWeight(1)"
-            />
-            <span id="semantic_value1" class="semantic_value">(50%)</span>
-            <span>Semantic Weightage</span>
+            <div class="semantic_wrapper">
+              <span style="text-align: center">Scoring Weightage</span>
+              <div>
+                <span>Grammar Weightage</span>
+                <span id="grammar_value1" class="grammar_value">(50%)</span>
+                <input
+                  type="range"
+                  name="grammar_weightage1"
+                  class="grammar_weightage"
+                  id="grammar_weightage1"
+                  min="0"
+                  max="100"
+                  step="1"
+                  value="50"
+                  onchange="updateGrammarWeight(1)"
+                />
+                <span id="semantic_value1" class="semantic_value">(50%)</span>
+                <span>Semantic Weightage</span>
+              </div>
+            </div>
           </div>
           <div id="semantic_strictness_div1" style="display: none">
             <!-- <label for="grammar_weightage1">Grammar Weightage</label> -->
-            <span id="slider2_label1" class="slider2_label"
-              >Semantic Strictness :
+            <div class="semantic_wrapper">
               <span
-                class="semantic_strictness_value"
-                id="semantic_strictness_value1"
-                >0.5</span
-              >
-            </span>
-            <span>Less Strict</span>
-            <input
-              type="range"
-              name="semantic_strictness1"
-              class="semantic_strictness"
-              id="semantic_strictness1"
-              min="0"
-              max="1"
-              step="0.01"
-              value="0.5"
-              onchange="updateSemanticStrictness(1)"
-            />
-            <span>More Strict</span>
+                id="slider2_label1"
+                class="slider2_label"
+                style="text-align: center"
+                >Semantic Strictness :
+                <span
+                  class="semantic_strictness_value"
+                  id="semantic_strictness_value1"
+                  >0.5</span
+                >
+              </span>
+
+              <div>
+                <span>Less Strict</span>
+                <input
+                  type="range"
+                  name="semantic_strictness1"
+                  class="semantic_strictness"
+                  id="semantic_strictness1"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  value="0.5"
+                  onchange="updateSemanticStrictness(1)"
+                />
+                <span>More Strict</span>
+              </div>
+            </div>
           </div>
           <div>
             Toggle Answer Key
@@ -155,6 +168,14 @@
               placeholder="Answer Key"
             ></textarea>
           </section>
+          <div class="results mui-panel" id="results2">
+            <div id="output2" class="output mui-panel">
+              <h1>Score</h1>
+            </div>
+            <div id="feedback2" class="output mui-panel">
+              <h1>Feedback</h1>
+            </div>
+          </div>
         </div>
         <div class="actions_area" id="actions_area2">
           <div id="grammar_weightage_div2" style="display: none">
@@ -162,48 +183,64 @@
               >50</span
             > -->
             <!-- <label for="grammar_weightage1">Grammar Weightage</label> -->
-            <span>Grammar Weightage</span>
-            <span id="grammar_value2" class="grammar_value">(50%)</span>
-            <input
-              type="range"
-              name="grammar_weightage2"
-              class="grammar_weightage"
-              id="grammar_weightage2"
-              min="0"
-              max="100"
-              step="1"
-              onchange="updateGrammarWeight(2)"
-            />
-            <span id="semantic_value2" class="semantic_value">(50%)</span>
-            <span>Semantic Weightage</span>
+            <div class="semantic_wrapper">
+              <span style="text-align: center">Scoring Weightage</span>
+              <div>
+                <span>Grammar Weightage</span>
+                <span id="grammar_value2" class="grammar_value">(50%)</span>
+                <input
+                  type="range"
+                  name="grammar_weightage2"
+                  class="grammar_weightage"
+                  id="grammar_weightage2"
+                  min="0"
+                  max="100"
+                  step="1"
+                  onchange="updateGrammarWeight(2)"
+                />
+                <span id="semantic_value2" class="semantic_value">(50%)</span>
+                <span>Semantic Weightage</span>
+              </div>
+            </div>
           </div>
           <div id="semantic_strictness_div2" style="display: none">
             <!-- <label for="grammar_weightage1">Grammar Weightage</label> -->
-            <span id="slider2_label2" class="slider2_label"
-              >Semantic Strictness :
+            <div class="semantic_wrapper">
               <span
-                class="semantic_strictness_value"
-                id="semantic_strictness_value2"
-                >0.5</span
-              >
-            </span>
-            <span>Less Strict</span>
-            <input
-              type="range"
-              name="semantic_strictness2"
-              class="semantic_strictness"
-              id="semantic_strictness2"
-              min="0"
-              max="1"
-              step="0.01"
-              onchange="updateSemanticStrictness(2)"
-            />
-            <span>More Strict</span>
+                id="slider2_label2"
+                class="slider2_label"
+                style="text-align: center"
+                >Semantic Strictness :
+                <span
+                  class="semantic_strictness_value"
+                  id="semantic_strictness_value2"
+                  >0.5</span
+                >
+              </span>
+              <div>
+                <span>Less Strict</span>
+                <input
+                  type="range"
+                  name="semantic_strictness2"
+                  class="semantic_strictness"
+                  id="semantic_strictness2"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  onchange="updateSemanticStrictness(2)"
+                />
+                <span>More Strict</span>
+              </div>
+            </div>
           </div>
           <div>
             Toggle Answer Key
             <label class="switch">
-              <input type="checkbox" onchange="toggleAnswerKey(2)" />
+              <input
+                type="checkbox"
+                id="toggleAnswer2"
+                onchange="toggleAnswerKey(2)"
+              />
               <span class="slider round"></span>
             </label>
           </div>
@@ -227,6 +264,28 @@
       </div>
     </main>
     <script>
+      function activateModal() {
+        // initialize modal element
+        var modalEl = document.createElement("div");
+        let loader = document.createElement("div");
+        loader.id = "loading";
+        let ring = document.createElement("div");
+        ring.classList.add("lds-dual-ring");
+        // ring.style.zIndex = "1000";
+        loader.appendChild(ring);
+        modalEl.appendChild(loader);
+        // <div id="loading">
+        //       <div class="lds-dual-ring"></div>
+        //     </div>
+        modalEl.style.width = "400px";
+        modalEl.style.height = "300px";
+        modalEl.style.margin = "100px auto";
+        modalEl.style.backgroundColor = "transparent";
+
+        // show modal
+        mui.overlay("on", modalEl);
+      }
+
       const feedback = document.getElementById("feedback");
       const checkbox = document.getElementById("toggleAnswer1");
       // updateGrammarWeight(1);
@@ -303,7 +362,8 @@
           semantic_strictness,
           answer_key,
         };
-
+        activateModal();
+        // mui.overlay("on", modalEl);
         const str = JSON.stringify(obj);
         fetch("http://127.0.0.1:5000/grade", {
           method: "POST",
@@ -311,6 +371,7 @@
         })
           .then((response) => response.json())
           .then((result) => {
+            mui.overlay("off");
             if (!result) {
               output.innerHTML = "<h3>Sorry, something went wrong!</h3>";
             } else {
@@ -350,6 +411,7 @@
             console.log("Success:", result);
           })
           .catch((error) => {
+            mui.overlay("off");
             console.error("Error:", error);
           });
       }
@@ -369,20 +431,23 @@
       // send image to backend server
       function sendImage() {
         var image = document.getElementById("image_input");
-        var text = document.getElementById("input_text_area");
+        var text = document.getElementById("input_text_area2");
         var formData = new FormData();
-        console.log(image.files, image.value);
+        // console.log(image.files, image.value);
         formData.append("image", image.files[0]);
+        activateModal();
         fetch("http://127.0.0.1:5000/ocr", {
           method: "POST",
           body: formData,
         })
           .then((response) => response.json())
           .then((result) => {
+            mui.overlay("off");
             text.value = result.text;
             console.log("Success:", result);
           })
           .catch((error) => {
+            mui.overlay("off");
             console.error("Error:", error);
           });
       }
