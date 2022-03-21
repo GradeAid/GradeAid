@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="icon" type="image/x-icon" href="/static/gradeaid.png">
+    <link rel="icon" type="image/x-icon" href="/static/gradeaid.png" />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -58,14 +58,14 @@
           </div>
         </div>
 
-
         <div class="actions_area" id="actions_area1">
           <div id="grammar_weightage_div1" style="display: none">
-            <span class="grammar_weightage_value" id="grammar_weightage_value1"
+            <!-- <span class="grammar_weightage_value" id="grammar_weightage_value1"
               >50</span
-            >
+            > -->
             <!-- <label for="grammar_weightage1">Grammar Weightage</label> -->
-            <span>Semantic Weightage</span>
+            <span>Grammar Weightage</span>
+            <span id="grammar_value1" class="grammar_value">(50%)</span>
             <input
               type="range"
               name="grammar_weightage1"
@@ -77,18 +77,19 @@
               value="50"
               onchange="updateGrammarWeight(1)"
             />
-            <span>Grammar Weightage</span>
+            <span id="semantic_value1" class="semantic_value">(50%)</span>
+            <span>Semantic Weightage</span>
           </div>
           <div id="semantic_strictness_div1" style="display: none">
-            <span
-              class="semantic_strictness_value"
-              id="semantic_strictness_value1"
-              >0.5</span
-            >
             <!-- <label for="grammar_weightage1">Grammar Weightage</label> -->
             <span id="slider2_label1" class="slider2_label"
-              >Semantic Strictness</span
-            >
+              >Semantic Strictness :
+              <span
+                class="semantic_strictness_value"
+                id="semantic_strictness_value1"
+                >0.5</span
+              >
+            </span>
             <span>Less Strict</span>
             <input
               type="range"
@@ -157,11 +158,12 @@
         </div>
         <div class="actions_area" id="actions_area2">
           <div id="grammar_weightage_div2" style="display: none">
-            <span class="grammar_weightage_value" id="grammar_weightage_value2"
+            <!-- <span class="grammar_weightage_value" id="grammar_weightage_value2"
               >50</span
-            >
+            > -->
             <!-- <label for="grammar_weightage1">Grammar Weightage</label> -->
-            <span>Semantic Weightage</span>
+            <span>Grammar Weightage</span>
+            <span id="grammar_value2" class="grammar_value">(50%)</span>
             <input
               type="range"
               name="grammar_weightage2"
@@ -172,18 +174,19 @@
               step="1"
               onchange="updateGrammarWeight(2)"
             />
-            <span>Grammar Weightage</span>
+            <span id="semantic_value2" class="semantic_value">(50%)</span>
+            <span>Semantic Weightage</span>
           </div>
           <div id="semantic_strictness_div2" style="display: none">
-            <span
-              class="semantic_strictness_value"
-              id="semantic_strictness_value2"
-              >0.5</span
-            >
             <!-- <label for="grammar_weightage1">Grammar Weightage</label> -->
             <span id="slider2_label2" class="slider2_label"
-              >Semantic Strictness</span
-            >
+              >Semantic Strictness :
+              <span
+                class="semantic_strictness_value"
+                id="semantic_strictness_value2"
+                >0.5</span
+              >
+            </span>
             <span>Less Strict</span>
             <input
               type="range"
@@ -225,14 +228,35 @@
     </main>
     <script>
       const feedback = document.getElementById("feedback");
+      const checkbox = document.getElementById("toggleAnswer1");
+      // updateGrammarWeight(1);
+
+      // function updateSliderValue(id) {
+      //   var grammar_slider = document.getElementById("grammar_weightage" + id);
+      //   grammar_slider.addEventListener("change", function () {
+      //     document.getElementById(
+      //       "grammar_field" + id
+      //     ).innerHTML = `Grammar Weightage (${grammar_weightage.value}%)`;
+      //     document.getElementById(
+      //       "semantic_field1" + id
+      //     ).innerHTML = `Semantic Weightage (${100 - grammar_weightage.value}%)`;
+      //   });
+      // }
 
       function roundToTwoDecimals(num) {
         return +(Math.round(num + "e+2") + "e-2");
       }
 
       function updateGrammarWeight(id) {
-        document.getElementById("grammar_weightage_value" + id).innerText =
-          document.getElementById("grammar_weightage" + id).value;
+        // console.log(id);
+        // document.getElementById("grammar_weightage_value" + id).innerText =
+        //   `(${document.getElementById("grammar_weightage" + id).value})`;
+        document.getElementById("grammar_value" + id).innerText = `(${
+          document.getElementById("grammar_weightage" + id).value
+        }%)`;
+        document.getElementById("semantic_value" + id).innerText = `(${
+          100 - document.getElementById("grammar_weightage" + id).value
+        }%)`;
       }
 
       function updateSemanticStrictness(id) {
@@ -290,18 +314,38 @@
             if (!result) {
               output.innerHTML = "<h3>Sorry, something went wrong!</h3>";
             } else {
-              final_score = (grammar_weightage * result.score) + ((100 - grammar_weightage) * result.semantic_score.semantic_score);
+              if (checkbox.checked) {
+                final_score =
+                  grammar_weightage * result.score +
+                  (100 - grammar_weightage) *
+                    result.semantic_score.semantic_score;
 
-              output.innerHTML = `
-                <h2>Grammar Score = ${result.score}/10</h2>
-                <h2>Semantic Score = ${roundToTwoDecimals(result.semantic_score.semantic_score)}/10</h2>
-                <h1>Final Score = <span class="score">${roundToTwoDecimals(final_score / 100)}</span>/10</h1>
-              `
-              feedback_data = result.semantic_score.key_sentences_not_in_answer;
-              feedback.innerHTML = `
-                <h2>Key sentences not in Answer</h2>
-                ${feedback_data.map(data => `<h3>${data}</h3>`).join("")}
-              `
+                output.innerHTML = `
+                  <h2>Grammar Score = ${result.score}/10</h2>
+                  <h2>Semantic Score = ${roundToTwoDecimals(
+                    result.semantic_score.semantic_score
+                  )}/10</h2>
+                  <h1>Final Score = <span class="score">${roundToTwoDecimals(
+                    final_score / 100
+                  )}</span>/10</h1>
+                `;
+                feedback_data =
+                  result.semantic_score.key_sentences_not_in_answer;
+                feedback.innerHTML = `
+                  <h2 class="feedback_heading">Key points not in Answer</h2>
+                  ${feedback_data
+                    .map((data) => `<li class="list_item">${data}</li>`)
+                    .join("")}
+                `;
+              } else {
+                output.innerHTML = `
+                  <h1>Final Score = <span class="score">${roundToTwoDecimals(
+                    result.score
+                  )}</span>/10</h1>
+                `;
+
+                feedback.innerHTML = `<h3>Feedback not available for normal grading!<h3>`;
+              }
             }
             console.log("Success:", result);
           })

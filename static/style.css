@@ -127,15 +127,15 @@ h1 {
 
 .slider2_label {
   position: relative;
-  bottom: 40px;
+  bottom: 20px;
   left: 198px;
 }
 
-.semantic_strictness_value {
+/* .semantic_strictness_value {
   position: relative;
   bottom: 20px;
   left: 265px;
-}
+} */
 
 /* .grammar_weightage::before {
   content: "0";
@@ -214,12 +214,15 @@ input:checked + .slider:before {
 /* Output Section */
 .results {
   max-height: 600px;
+  /* height: 600px; */
+  /* height: auto; */
   padding: 20px;
   width: 45%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
+  overflow: auto;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
+  /* justify-content: space-around; */
   background-color: white;
 }
 
@@ -245,6 +248,7 @@ input:checked + .slider:before {
 
 #feedback {
   overflow: auto;
+  height: calc(100% - 30px);
 }
 
 .score {

@@ -3,11 +3,14 @@
 
 # In[1]:
 
-
 from sentence_transformers import SentenceTransformer, util
 import spacy
 import scipy
 import json
+import os
+
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
+
 
 
 # In[2]:
