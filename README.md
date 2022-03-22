@@ -1,6 +1,6 @@
-# Automatic-Essay-Scoring (AES)
+# GradeAid - A Smart Exam Grading System
 
-Automated Essay Scoring (AES) is a tool for evaluating and scoring of essays written in response to specific prompts. It can be defined as the process of scoring written essays using computer programs. The process of automating the assessment process could be useful for both educators and learners since it encourages the iterative improvements of students' writings.
+GradeAid is a tool for evaluating and scoring of essays written in response to specific prompts. It can be defined as the process of scoring written essays using computer programs. The process of automating the assessment process could be useful for both educators and learners since it encourages the iterative improvements of students' writings.
 
 ## Why AES?
 
@@ -49,6 +49,20 @@ After training our model, the next step was to make our project available to use
 
 The essential of the webpage can be found in the folder, **webapp**.
 Screenshots of the webpage can be found in the following links:
+
+## Installation
+
+- Make sure to have Python installed on your system.
+- Run ```setup.sh``` to install the required dependencies and models.
+- In case ```setup.sh``` does not work, run the following commands:
+```
+pip install -r requirements.txt
+python -m spacy download en_core_web_sm
+python3 setup.py
+```
+- To run the webapp, run ```python3 site.py``` and open [http://localhost:5000/]() in your browser.
+
+## Screenshots
 
 - <img width="670" alt="webpage1 jpg" src="https://user-images.githubusercontent.com/50379093/86618508-ad529b00-bfd6-11ea-9ace-b9b58eead13e.PNG">
 - <img width="671" alt="webpage2 jpg" src="https://user-images.githubusercontent.com/50379093/86618621-de32d000-bfd6-11ea-987b-cd49cc599bc6.PNG">
