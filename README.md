@@ -2,6 +2,8 @@
 
 GradeAid is a tool for evaluating and scoring of essays written in response to specific prompts. It can be defined as the process of scoring written essays using computer programs. The process of automating the assessment process could be useful for both educators and learners since it encourages the iterative improvements of students' writings.
 
+<img width="670" alt="MainPage" src="https://github.com/GradeAid/GradeAid/blob/second_secondary/screenshots/GradeAid%20(1).png">
+
 ## Why AES?
 
 Automated grading if proven effective will not only reduce the time for assessment but comparing it with human scores will also make the score realistic. The project aims to develop an automated essay assessment system by use of machine learning techniques and Neural networks by classifying a corpus of textual entities into a small number of discrete categories, corresponding to possible grades.
@@ -64,9 +66,10 @@ python3 setup.py
 
 ## Screenshots
 
-- <img width="670" alt="webpage1 jpg" src="https://user-images.githubusercontent.com/50379093/86618508-ad529b00-bfd6-11ea-9ace-b9b58eead13e.PNG">
-- <img width="671" alt="webpage2 jpg" src="https://user-images.githubusercontent.com/50379093/86618621-de32d000-bfd6-11ea-987b-cd49cc599bc6.PNG">
-- <img width="667" alt="webpage3 jpg" src="https://user-images.githubusercontent.com/50379093/86618679-f86cae00-bfd6-11ea-805a-a4f09d78b992.PNG">
+- <img width="671" alt="screenshot 1" src="https://github.com/GradeAid/GradeAid/blob/second_secondary/screenshots/GradeAid%20(2).png">
+- <img width="671" alt="screenshot 2" src="https://github.com/GradeAid/GradeAid/blob/second_secondary/screenshots/GradeAid%20(3).png">
+- <img width="671" alt="screenshot 3" src="https://github.com/GradeAid/GradeAid/blob/second_secondary/screenshots/GradeAid%20(4).png">
+- <img width="671" alt="screenshot 4" src="https://github.com/GradeAid/GradeAid/blob/second_secondary/screenshots/GradeAid%20(5).png">
 
 ## Conclusion
 
