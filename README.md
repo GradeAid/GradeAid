@@ -2,7 +2,7 @@
 
 GradeAid is a tool for evaluating and scoring of essays written in response to specific prompts. It can be defined as the process of scoring written essays using computer programs. The process of automating the assessment process could be useful for both educators and learners since it encourages the iterative improvements of students' writings.
 
-<img width="670" alt="MainPage" src="https://github.com/GradeAid/GradeAid/blob/second_secondary/screenshots/GradeAid%20(1).png">
+<img alt="MainPage" src="https://github.com/GradeAid/GradeAid/blob/second_secondary/screenshots/GradeAid%20(1).png">
 
 ## Why AES?
 
@@ -66,10 +66,10 @@ python3 setup.py
 
 ## Screenshots
 
-- <img width="671" alt="screenshot 1" src="https://github.com/GradeAid/GradeAid/blob/second_secondary/screenshots/GradeAid%20(2).png">
-- <img width="671" alt="screenshot 2" src="https://github.com/GradeAid/GradeAid/blob/second_secondary/screenshots/GradeAid%20(3).png">
-- <img width="671" alt="screenshot 3" src="https://github.com/GradeAid/GradeAid/blob/second_secondary/screenshots/GradeAid%20(4).png">
-- <img width="671" alt="screenshot 4" src="https://github.com/GradeAid/GradeAid/blob/second_secondary/screenshots/GradeAid%20(5).png">
+<img alt="screenshot 1" src="https://github.com/GradeAid/GradeAid/blob/second_secondary/screenshots/GradeAid%20(2).png">
+<img alt="screenshot 2" src="https://github.com/GradeAid/GradeAid/blob/second_secondary/screenshots/GradeAid%20(4).png">
+<img alt="screenshot 3" src="https://github.com/GradeAid/GradeAid/blob/second_secondary/screenshots/GradeAid%20(5).png">
+<img alt="screenshot 4" src="https://github.com/GradeAid/GradeAid/blob/second_secondary/screenshots/GradeAid%20(3).png">
 
 ## Conclusion
 
