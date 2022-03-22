@@ -36,7 +36,7 @@ For making our data ready to apply algorithms,we require one more step.Machine l
 
 Initially we applied machine learning algorithms like linear regression, SVR and Random Forest on the dataset without addition of features that were mentioned in the preprocessing section before. Our results were not really satisfactory as our mean squared error was quite high for all the above algorithms. After this initial evaluation, we added the extra features,applied CountVectorizer again on this modified dataset and applied the same three algorithms.There was a great improvement in the performance of all three algorithms especially Random forest for which the mean squared error reduced drastically.
 
-Python notebook for the implementation of this module can be found in the file, **Essay_Scoring_1.ipynb**
+Python notebook for the implementation of this module can be found in the file, **data_processing.ipynb**
 
 **3. Applying Neural Networks**
 
@@ -55,14 +55,16 @@ Screenshots of the webpage can be found in the following links:
 ## Installation
 
 - Make sure to have Python installed on your system.
-- Run ```setup.sh``` to install the required dependencies and models.
-- In case ```setup.sh``` does not work, run the following commands:
+- Run `setup.sh` to install the required dependencies and models.
+- In case `setup.sh` does not work, run the following commands:
+
 ```
 pip install -r requirements.txt
 python -m spacy download en_core_web_sm
 python3 setup.py
 ```
-- To run the webapp, run ```python3 site.py``` and open [http://localhost:5000/]() in your browser.
+
+- To run the webapp, run `python3 site.py` and open [http://localhost:5000/]() in your browser.
 
 ## Screenshots
 
