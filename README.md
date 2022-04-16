@@ -16,7 +16,8 @@ https://www.kaggle.com/c/asap-aes/data
 
 ## Architecture Diagram
 
-![arch](https://user-images.githubusercontent.com/50379093/86618332-5947b680-bfd6-11ea-96d7-7f0ac7c8eda0.jpeg)
+![GradeAid Architecture drawio](https://user-images.githubusercontent.com/61461606/163671474-08fa4531-dc94-4053-83c4-2e2b9e59d35a.png)
+
 
 ## Proposed Model
 
