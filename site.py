@@ -18,6 +18,7 @@ from gensim.models.keyedvectors import KeyedVectors
 from keras import backend as K
 import os
 from semantic_similarity import match_answer_with_key
+from ocr import preprocessing as pp, get_text_from_image as gt
 
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 np.seterr(divide="ignore", invalid="ignore")
@@ -168,8 +169,11 @@ def performOCR():
     # extract image and save to images folder
     print(request.files)
     image = request.files["image"]
-    image.save("./image.jpg")
-    ocr_text = getTextFromImage()
+    image.save("./image.jpeg")
+
+    pp.get_string(r".\image.jpeg")
+    ocr_text = gt.get_string(r".\binary_img.jpeg")
+    # ocr_text = getTextFromImage()
     # print(image["image"])
     # imagefile = request.files.get("image", "")
     # print(imagefile)
