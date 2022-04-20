@@ -304,6 +304,23 @@
             </button>
           </div>
         </div>
+        <div id="intermediate_output" style="display: none">
+          <h2>Intermediate Output</h2>
+          <div style="display: flex; justify-content: space-between">
+            <figure style="width: 30%">
+              <img style="width: 100%" id="gray_img" alt="Gray" />
+              <figcaption>Fig 1: Gray Scale Image</figcaption>
+            </figure>
+            <figure style="width: 30%">
+              <img style="width: 100%" id="noise_free_img" alt="Noise Free" />
+              <figcaption>Fig 2: Noise Free Image</figcaption>
+            </figure>
+            <figure style="width: 30%">
+              <img style="width: 100%" id="binary_img" alt="Binary" />
+              <figcaption>Fig 3: Binary Image</figcaption>
+            </figure>
+          </div>
+        </div>
       </div>
     </main>
 
@@ -647,6 +664,10 @@
       function sendImage() {
         var image = document.getElementById("image_input");
         var text = document.getElementById("input_text_area2");
+        let gray_img = document.getElementById("gray_img");
+        let noise_free_img = document.getElementById("noise_free_img");
+        let binary_img = document.getElementById("binary_img");
+        // .src = "data:image/png;base64," + yourByteArrayAsBase64;
         var formData = new FormData();
         if (!image.files[0]) return;
         console.log(image.files, image.value);
@@ -660,6 +681,11 @@
           .then((result) => {
             mui.overlay("off");
             text.value = result.text;
+            document.getElementById("intermediate_output").style.display =
+              "block";
+            gray_img.src = "data:image/png;base64," + result.images[0];
+            noise_free_img.src = "data:image/png;base64," + result.images[1];
+            binary_img.src = "data:image/png;base64," + result.images[2];
             console.log("Success:", result);
           })
           .catch((error) => {

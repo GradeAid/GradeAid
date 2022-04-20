@@ -1,24 +1,41 @@
-from asyncio.windows_events import NULL
+# from asyncio.windows_events import NULL
 from flask import Flask, request, render_template, jsonify, url_for
 from flask_cors import CORS
 import numpy as np
-import pandas as pd
+
+# import pandas as pd
 import nltk
 import re
 from nltk.corpus import stopwords
-from nltk.tokenize import sent_tokenize, word_tokenize
-from gensim.models import Word2Vec
+
+# from nltk.tokenize import sent_tokenize, word_tokenize
+# from gensim.models import Word2Vec
 from keras.layers import Embedding, LSTM, Dense, Dropout, Lambda, Flatten
 from keras.models import Sequential, load_model, model_from_config
 import keras.backend as K
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error
-from sklearn.metrics import cohen_kappa_score
+
+# from sklearn.model_selection import train_test_split
+# from sklearn.metrics import mean_squared_error
+# from sklearn.metrics import cohen_kappa_score
 from gensim.models.keyedvectors import KeyedVectors
 from keras import backend as K
 import os
 from semantic_similarity import match_answer_with_key
 from ocr import preprocessing as pp, get_text_from_image as gt
+import io
+from base64 import encodebytes
+import PIL.Image
+from flask import jsonify
+
+
+def get_response_image(image_path):
+    fp = open(image_path, "rb")
+    pil_img = PIL.Image.open(fp)  # reads the PIL image
+    byte_arr = io.BytesIO()
+    pil_img.save(byte_arr, format="PNG")  # convert the PIL image to byte array
+    encoded_img = encodebytes(byte_arr.getvalue()).decode("ascii")  # encode as base64
+    return encoded_img
+
 
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 np.seterr(divide="ignore", invalid="ignore")
@@ -173,6 +190,10 @@ def performOCR():
 
     pp.get_string(r".\image.jpeg")
     ocr_text = gt.get_string(r".\binary_img.jpeg")
+    result = [r".\gray_img.jpeg", r".\noise_free_img.jpeg", r".\binary_img.jpeg"]
+    encoded_imges = []
+    for image_path in result:
+        encoded_imges.append(get_response_image(image_path))
     # ocr_text = getTextFromImage()
     # print(image["image"])
     # imagefile = request.files.get("image", "")
@@ -181,7 +202,7 @@ def performOCR():
     # final_text = request.get_json("text")["text"]
     # score = convertToVec(final_text)
     # K.clear_session()
-    return jsonify({"text": ocr_text}), 201
+    return jsonify({"text": ocr_text, "images": encoded_imges}), 201
     # return jsonify({"score": score}), 201
 
 
