@@ -73,7 +73,7 @@ python3 setup.py
 <img alt="screenshot 2" src="https://github.com/GradeAid/GradeAid/blob/second_secondary/screenshots/GradeAid%20(4).png">
 <img alt="screenshot 3" src="https://github.com/GradeAid/GradeAid/blob/second_secondary/screenshots/GradeAid%20(5).png">
 <img alt="screenshot 4" src="https://github.com/GradeAid/GradeAid/blob/second_secondary/screenshots/GradeAid%20(3).png">
-![GradeAid(5)](https://user-images.githubusercontent.com/61461606/165125488-b95b639c-5f91-4e5a-a57d-9398e4c16397.png)
+<img alt="screenshot 5" src="https://user-images.githubusercontent.com/61461606/165125488-b95b639c-5f91-4e5a-a57d-9398e4c16397.png">
 
 
 ## Conclusion
