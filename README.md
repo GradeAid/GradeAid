@@ -2,7 +2,7 @@
 
 GradeAid is a tool for evaluating and scoring of essays written in response to specific prompts. It can be defined as the process of scoring written essays using computer programs. The process of automating the assessment process could be useful for both educators and learners since it encourages the iterative improvements of students' writings.
 
-<img alt="MainPage" src="https://github.com/GradeAid/GradeAid/blob/second_secondary/screenshots/GradeAid%20(1).png">
+<img alt="MainPage" src="https://user-images.githubusercontent.com/61461606/165126235-b60594df-02a8-4bb5-b567-768efc2d531c.png">
 
 ## Why AES?
 
@@ -68,11 +68,10 @@ python3 setup.py
 - To run the webapp, run `python3 site.py` and open [http://localhost:5000/]() in your browser.
 
 ## Screenshots
-
-<img alt="screenshot 1" src="https://github.com/GradeAid/GradeAid/blob/second_secondary/screenshots/GradeAid%20(2).png">
-<img alt="screenshot 2" src="https://github.com/GradeAid/GradeAid/blob/second_secondary/screenshots/GradeAid%20(4).png">
-<img alt="screenshot 3" src="https://github.com/GradeAid/GradeAid/blob/second_secondary/screenshots/GradeAid%20(5).png">
-<img alt="screenshot 4" src="https://github.com/GradeAid/GradeAid/blob/second_secondary/screenshots/GradeAid%20(3).png">
+<img alt="screenshot 1" src="https://user-images.githubusercontent.com/61461606/165126287-d5032c76-301d-4dab-9ac9-fd4e943f1319.png">
+<img alt="screenshot 2" src="https://user-images.githubusercontent.com/61461606/165126307-bdcf032c-de17-414c-8f44-2773cc5df71f.png">
+<img alt="screenshot 3" src="https://user-images.githubusercontent.com/61461606/165126323-a85f9cd6-e557-4d9b-bc9e-5816a59f9cbb.png">
+<img alt="screenshot 4" src="https://user-images.githubusercontent.com/61461606/165126331-65fc3504-7c19-4788-80d2-900ba0181e1c.png">
 <img alt="screenshot 5" src="https://user-images.githubusercontent.com/61461606/165125488-b95b639c-5f91-4e5a-a57d-9398e4c16397.png">
 
 
