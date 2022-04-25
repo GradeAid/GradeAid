@@ -22,8 +22,10 @@ import numpy as np
 def image_smoothening(img):
     ret1, th1 = cv2.threshold(img, 88, 255, cv2.THRESH_BINARY)
     ret2, th2 = cv2.threshold(th1, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    # blur = cv2.GaussianBlur(img, (5, 5), 0)
     blur = cv2.GaussianBlur(th2, (5, 5), 0)
     ret3, th3 = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    # return blur
     return th3
 
 
@@ -35,7 +37,8 @@ def remove_noise_and_smooth(img):
     closing = cv2.morphologyEx(filtered, cv2.MORPH_CLOSE, kernel)
     opening = cv2.morphologyEx(closing, cv2.MORPH_OPEN, kernel)
     img = image_smoothening(img)
-    or_image = cv2.bitwise_or(img, filtered)
+    or_image = cv2.bitwise_or(img, opening)
+    # or_image = cv2.bitwise_or(img, filtered)
 
     return or_image
 
@@ -71,7 +74,10 @@ def noise_removal(img):
 
 def binarize(img):
     # Apply threshold to get image with only b&w (binarization)
-    img = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
+    img = cv2.adaptiveThreshold(
+        img.astype(np.uint8), 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 9, 41
+    )
+    # img = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
     return img
 
 
@@ -82,12 +88,14 @@ def get_string(img_path):
     save_path = r".\gray_img.jpeg"
     cv2.imwrite(save_path, img)
 
-    img = binarize(img)
-    save_path = r".\binary_img.jpeg"
-    cv2.imwrite(save_path, img)
-
     img = remove_noise_and_smooth(img)
     save_path = r".\noise_free_img.jpeg"
+    cv2.imwrite(save_path, img)
+
+    img = binarize(img)
+    kernel = np.ones((1, 1), np.uint8)
+    img = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
+    save_path = r".\binary_img.jpeg"
     cv2.imwrite(save_path, img)
 
 

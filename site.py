@@ -1,4 +1,5 @@
 # from asyncio.windows_events import NULL
+# from crypt import methods
 from flask import Flask, request, render_template, jsonify, url_for
 from flask_cors import CORS
 import numpy as np
@@ -180,16 +181,14 @@ def gradeAnswer():
     return jsonify({"score": score, "semantic_score": semantic_score}), 201
 
 
-@app.route("/ocr", methods=["POST"])
-def performOCR():
-    # K.clear_session()
-    # extract image and save to images folder
+@app.route("/preprocess", methods=["POST"])
+def preprocess():
     print(request.files)
     image = request.files["image"]
     image.save("./image.jpeg")
 
     pp.get_string(r".\image.jpeg")
-    ocr_text = gt.get_string(r".\binary_img.jpeg")
+    # ocr_text = gt.get_string(r".\binary_img.jpeg")
     result = [r".\gray_img.jpeg", r".\noise_free_img.jpeg", r".\binary_img.jpeg"]
     encoded_imges = []
     for image_path in result:
@@ -202,7 +201,33 @@ def performOCR():
     # final_text = request.get_json("text")["text"]
     # score = convertToVec(final_text)
     # K.clear_session()
-    return jsonify({"text": ocr_text, "images": encoded_imges}), 201
+    return jsonify({"images": encoded_imges}), 201
+
+
+@app.route("/ocr", methods=["POST"])
+def performOCR():
+    # K.clear_session()
+    # extract image and save to images folder
+    # print(request.files)
+    # image = request.files["image"]
+    # image.save("./image.jpeg")
+
+    # pp.get_string(r".\image.jpeg")
+    ocr_text = gt.get_string(r".\binary_img.jpeg")
+    # result = [r".\gray_img.jpeg", r".\noise_free_img.jpeg", r".\binary_img.jpeg"]
+    # encoded_imges = []
+    # for image_path in result:
+    #     encoded_imges.append(get_response_image(image_path))
+    # ocr_text = getTextFromImage()
+    # print(image["image"])
+    # imagefile = request.files.get("image", "")
+    # print(imagefile)
+    # print(request.get_data("image")["image"])
+    # final_text = request.get_json("text")["text"]
+    # score = convertToVec(final_text)
+    # K.clear_session()
+    return jsonify({"text": ocr_text}), 201
+    # return jsonify({"text": ocr_text, "images": encoded_imges}), 201
     # return jsonify({"score": score}), 201
 
 

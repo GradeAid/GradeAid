@@ -195,6 +195,13 @@
               alt="Upload an Image to view"
             /><br /><br />
             <input id="image_input" type="file" name="name" accept="image/*" />
+            <button
+              type="button"
+              class="mui-btn mui-btn--raised mui-btn--primary"
+              onclick="clearImage()"
+            >
+              Clear Image!
+            </button>
           </section>
           <section id="input_text2" class="mui-panel input_text">
             <textarea
@@ -298,6 +305,13 @@
             <button
               type="button"
               class="mui-btn mui-btn--raised mui-btn--danger"
+              onclick="preprocess()"
+            >
+              Preprocess Image
+            </button>
+            <button
+              type="button"
+              class="mui-btn mui-btn--raised mui-btn--primary"
               onclick="sendImage()"
             >
               Perform OCR!
@@ -660,10 +674,17 @@
         reader.readAsDataURL(this.files[0]);
       };
 
-      // send image to backend server
-      function sendImage() {
+      function clearImage() {
+        var image = document.getElementById("uploaded_image");
+        image.src = "";
+        image.alt = "Upload an Image to view";
+        document.getElementById("image_input").style.display = "inline-block";
+        var image_input = (document.getElementById("image_input").value = "");
+        // image_input.files = [];
+      }
+
+      function preprocess() {
         var image = document.getElementById("image_input");
-        var text = document.getElementById("input_text_area2");
         let gray_img = document.getElementById("gray_img");
         let noise_free_img = document.getElementById("noise_free_img");
         let binary_img = document.getElementById("binary_img");
@@ -673,19 +694,53 @@
         console.log(image.files, image.value);
         formData.append("image", image.files[0]);
         activateModal();
-        fetch("http://127.0.0.1:5000/ocr", {
+        fetch("http://127.0.0.1:5000/preprocess", {
           method: "POST",
           body: formData,
         })
           .then((response) => response.json())
           .then((result) => {
             mui.overlay("off");
-            text.value = result.text;
+            // text.value = result.text;
             document.getElementById("intermediate_output").style.display =
               "block";
             gray_img.src = "data:image/png;base64," + result.images[0];
             noise_free_img.src = "data:image/png;base64," + result.images[1];
             binary_img.src = "data:image/png;base64," + result.images[2];
+            console.log("Success:", result);
+          })
+          .catch((error) => {
+            mui.overlay("off");
+            console.error("Error:", error);
+          });
+      }
+
+      // send image to backend server
+      function sendImage() {
+        // var image = document.getElementById("image_input");
+        var text = document.getElementById("input_text_area2");
+        // let gray_img = document.getElementById("gray_img");
+        // let noise_free_img = document.getElementById("noise_free_img");
+        // let binary_img = document.getElementById("binary_img");
+        // .src = "data:image/png;base64," + yourByteArrayAsBase64;
+        // var formData = new FormData();
+        // if (!image.files[0]) return;
+        // console.log(image.files, image.value);
+        // formData.append("image", image.files[0]);
+        activateModal();
+        fetch("http://127.0.0.1:5000/ocr", {
+          method: "POST",
+          // body: formData,
+        })
+          .then((response) => response.json())
+          .then((result) => {
+            mui.overlay("off");
+            text.value = result.text;
+            // document.getElementById("intermediate_output").style.display =
+            //   "block";
+            // gray_img.src = "data:image/png;base64," + result.images[0];
+            // noise_free_img.src = "data:image/png;base64," + result.images[1];
+            // binary_img.src = "data:image/png;base64," + result.images[2];
             console.log("Success:", result);
           })
           .catch((error) => {
